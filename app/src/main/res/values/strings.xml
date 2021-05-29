@@ -7,6 +7,4 @@
     <string name="name">Name</string>
     <string name="password">Password</string>
     <string name="login">Login</string>
-    <string name="facebook">Facebook</string>
-    <string name="google">Google</string>
 </resources>
