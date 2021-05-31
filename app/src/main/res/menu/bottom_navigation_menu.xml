@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/mMovie"
+        android:enabled="true"
+        android:title="@string/movie"/>
+    <item
+        android:id="@+id/mSearch"
+        android:enabled="true"
+        android:title="@string/search"/>
+    <item
+        android:id="@+id/mAccount"
+        android:enabled="true"
+        android:title="@string/account"/>
+    <item
+        android:id="@+id/mSetting"
+        android:enabled="true"
+        android:title="@string/setting"/>
+</menu>
