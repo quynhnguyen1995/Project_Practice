@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/letter"
+    android:background="@drawable/background_letter"
     tools:context=".LoginActivity">
 
     <ImageView
@@ -18,14 +18,23 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
+    <TextView
+        android:textStyle="bold"
+        android:textColor="@android:color/holo_red_light"
+        android:layout_marginTop="80dp"
+        android:id="@+id/txtError1"
+        android:layout_marginStart="50dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgLogoByLetter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
     <EditText
+        android:layout_marginTop="10dp"
         android:id="@+id/edtName"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_marginLeft="25dp"
-        android:layout_marginTop="100dp"
-        android:layout_marginRight="25dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
         android:autofillHints="hintName"
         android:background="@drawable/border_edittext"
         android:hint="@string/name"
@@ -33,15 +42,24 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imgLogoByLetter" />
-
+        app:layout_constraintTop_toBottomOf="@id/txtError1" />
+    <TextView
+        android:textStyle="bold"
+        android:textColor="@android:color/holo_red_light"
+        android:layout_marginTop="20dp"
+        android:id="@+id/txtError2"
+        android:layout_marginStart="50dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edtName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
     <EditText
         android:id="@+id/edtPassword"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_marginLeft="25dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="25dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="50dp"
         android:autofillHints="hintPassword"
         android:background="@drawable/border_edittext"
         android:hint="@string/password"
@@ -49,16 +67,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtName" />
+        app:layout_constraintTop_toBottomOf="@+id/txtError2" />
 
     <Button
         android:textColor="@color/black"
         android:id="@+id/btnLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="25dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginRight="25dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="70dp"
+        android:layout_marginEnd="50dp"
         android:text="@string/login"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

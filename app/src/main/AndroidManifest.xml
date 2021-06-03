@@ -11,7 +11,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PracticeProject">
-        <activity android:name=".TrailerActivity"></activity>
         <activity android:name=".CastActivity" />
         <activity android:name=".DetailActivity" />
         <activity android:name=".HomeActivity" />
