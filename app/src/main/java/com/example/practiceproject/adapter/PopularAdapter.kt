@@ -1,5 +1,6 @@
 package com.example.practiceproject.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +13,7 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.line_home_popular.view.*
 
 
-class PopularAdapter(private var popList:List<Popular>): RecyclerView.Adapter<PopularAdapter.PopularViewHolder>(){
+class PopularAdapter(private var context: Context,private var popList:List<Popular>): RecyclerView.Adapter<PopularAdapter.PopularViewHolder>(){
 
     //inner class
     inner class PopularViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
@@ -32,7 +33,7 @@ class PopularAdapter(private var popList:List<Popular>): RecyclerView.Adapter<Po
         holder.itemTitle.text = popList[position].getTitle()
 
         //Using picasso
-        Picasso.get().load(popList[position].getPosterPath())
+        Picasso.get().load("https://image.tmdb.org/t/p/w500"+popList[position].getPosterPath())
             .placeholder(R.drawable.ic_launcher_background)
             .into(holder.itemImage)
     }

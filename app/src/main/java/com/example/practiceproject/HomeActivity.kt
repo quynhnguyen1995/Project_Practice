@@ -3,10 +3,12 @@ package com.example.practiceproject
 import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.practiceproject.adapter.PopularAdapter
 import com.example.practiceproject.model.Popular
 import com.google.gson.JsonObject
+import kotlinx.android.synthetic.main.activity_home.*
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
@@ -23,14 +25,12 @@ class HomeActivity : AppCompatActivity() {
 
     //list popular
     private val popularList = ArrayList<Popular>()
-    //Adapter
-    private lateinit var popularAdapter: PopularAdapter
+    private lateinit var popular: Popular
+    private lateinit var mPopular: List<Popular>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
-
-        popularAdapter = PopularAdapter(popularList)
     }
 
     inner class GetData(): AsyncTask<String, String, String>() {
@@ -70,10 +70,25 @@ class HomeActivity : AppCompatActivity() {
             try {
                 val jsonObject: JSONObject = JSONObject(result)
                 val jsonArray: JSONArray = jsonObject.getJSONArray("results")
-                for (i in )
+                for (i in 0..jsonArray.length()){
+                    val jsonObject1: JSONObject = jsonArray.getJSONObject(i)
+                    popular.setPosterPath(jsonObject1.getString("poster_path"))
+                    popular.setTitle(jsonObject1.getString("title"))
+
+                    popularList.add(popular)
+                }
             }catch (e: JSONException){
                 e.printStackTrace()
             }
+
+            PutDataIntoRecycleView(mPopular)
         }
+    }
+
+    //put data into recyclerview
+    private fun PutDataIntoRecycleView(mPopular: List<Popular>){
+        val popularAdapter: PopularAdapter = PopularAdapter(this,mPopular)
+        rvPopular.layoutManager = LinearLayoutManager(this)
+        rvPopular.adapter = popularAdapter
     }
 }
