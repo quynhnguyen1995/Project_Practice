@@ -20,7 +20,10 @@ import java.net.MalformedURLException
 import java.net.URL
 import java.util.ArrayList
 
-private const val BASE_URL = "https://api.themoviedb.org/3/"
+private const val POPULAR_URL = "https://api.themoviedb.org/3/movie/popular?api_key=a7e38c80a0efc42034dfb5c8b95a72cb"
+private const val TOP_RATE_URL = "https://api.themoviedb.org/3/movie/top_rated?api_key=a7e38c80a0efc42034dfb5c8b95a72cb"
+private const val NOW_PLAYING_MOVIE_URL = "https://api.themoviedb.org/3/movie/now_playing?api_key=a7e38c80a0efc42034dfb5c8b95a72cb"
+private const val UPCOMING_MOVIE_URL = "https://api.themoviedb.org/3/movie/upcoming?api_key=a7e38c80a0efc42034dfb5c8b95a72cb"
 class HomeActivity : AppCompatActivity() {
 
     //list popular
@@ -33,6 +36,7 @@ class HomeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_home)
     }
 
+    //list popular
     inner class GetData(): AsyncTask<String, String, String>() {
 
         override fun doInBackground(vararg params: String?): String {
@@ -41,7 +45,7 @@ class HomeActivity : AppCompatActivity() {
                 val url: URL
                 var urlConnection: HttpURLConnection? = null
                 try {
-                    url = URL(BASE_URL)
+                    url = URL(POPULAR_URL)
                     urlConnection = url.openConnection() as HttpURLConnection?
 
                     val inputStream: InputStream = urlConnection!!.inputStream
@@ -85,7 +89,7 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
-    //put data into recyclerview
+    //put data into recyclerview for popular
     private fun PutDataIntoRecycleView(mPopular: List<Popular>){
         val popularAdapter: PopularAdapter = PopularAdapter(this,mPopular)
         rvPopular.layoutManager = LinearLayoutManager(this)
