@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import com.example.practiceproject.api.ApiService
-import com.example.practiceproject.model.Data
+import com.example.practiceproject.model.Splash
 import kotlinx.android.synthetic.main.activity_splash.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -31,15 +31,15 @@ class SplashActivity : AppCompatActivity(){
         pbLoad.progress = 0
         val call  = service.getTokenRequest()
 
-        call.enqueue(object: Callback<Data> {
-            override fun onResponse(call: Call<Data>, response: Response<Data>) {
+        call.enqueue(object: Callback<Splash> {
+            override fun onResponse(call: Call<Splash>, response: Response<Splash>) {
                 val intent: Intent = Intent(this@SplashActivity, LoginActivity::class.java)
                 startActivity(intent)
                 finish()
                 pbLoad.progress = 10
             }
 
-            override fun onFailure(call: Call<Data>, t: Throwable) {
+            override fun onFailure(call: Call<Splash>, t: Throwable) {
                 Toast.makeText(applicationContext,"Loading Error", Toast.LENGTH_SHORT).show()
                 pbLoad.progress = 0
             }

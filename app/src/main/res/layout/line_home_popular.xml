@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/imgHome"
+        android:id="@+id/imgHomePopular"
         android:layout_width="100dp"
         android:layout_height="100dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -15,12 +15,12 @@
     <TextView
         android:textSize="23sp"
         android:textStyle="bold"
-        android:id="@+id/txtHomeName"
+        android:id="@+id/txtHomeTitlePopular"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="Name"
+        android:text="Title"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgHome" />
+        app:layout_constraintTop_toBottomOf="@+id/imgHomePopular" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
