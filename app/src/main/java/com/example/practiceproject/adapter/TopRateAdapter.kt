@@ -1,0 +1,36 @@
+package com.example.practiceproject.adapter
+
+import android.content.Context
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
+import com.example.practiceproject.R
+import com.example.practiceproject.model.PTopRate
+import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.line_home_top_rate.view.*
+
+class TopRateAdapter(val topRateList: ArrayList<PTopRate.TopRate>, val context: Context): RecyclerView.Adapter<TopRateAdapter.ViewHolder>() {
+
+    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        fun bindingValues(get: PTopRate.TopRate) {
+            Picasso.get().load("https://image.tmdb.org/t/p/w500/"+get.poster_path)
+                .into(itemView.imgHomeTopRate)
+            itemView.txtHomeTitleTopRate.text = get.title
+        }
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TopRateAdapter.ViewHolder {
+        val view: View = LayoutInflater.from(context).inflate(R.layout.line_home_top_rate, parent, false)
+        return TopRateAdapter.ViewHolder(view)
+    }
+
+    override fun onBindViewHolder(holder: TopRateAdapter.ViewHolder, position: Int) {
+        holder!!.bindingValues(topRateList[position])
+    }
+
+    override fun getItemCount(): Int {
+        return topRateList.size
+    }
+
+}

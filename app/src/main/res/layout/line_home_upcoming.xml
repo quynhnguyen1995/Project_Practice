@@ -1,20 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
     <ImageView
-        android:id="@+id/imgHomePopular"
+        android:id="@+id/imgHomeUpcoming"
         android:layout_width="100dp"
         android:layout_height="100dp"/>
 
     <TextView
         android:textSize="23sp"
         android:textStyle="bold"
-        android:id="@+id/txtHomeTitlePopular"
+        android:id="@+id/txtHomeTitleUpcoming"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"

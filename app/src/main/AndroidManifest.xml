@@ -13,9 +13,9 @@
         android:theme="@style/Theme.PracticeProject">
         <activity android:name=".CastActivity" />
         <activity android:name=".DetailActivity" />
-        <activity android:name=".HomeActivity" />
+        <activity android:name=".SplashActivity" />
         <activity android:name=".LoginActivity" />
-        <activity android:name=".SplashActivity">
+        <activity android:name=".HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.SEARCH" />
