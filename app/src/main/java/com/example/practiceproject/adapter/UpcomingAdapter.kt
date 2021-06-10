@@ -8,9 +8,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.practiceproject.R
 import com.example.practiceproject.model.PUpcomingMovie
 import com.squareup.picasso.Picasso
+import io.reactivex.Observable
+import io.reactivex.subjects.PublishSubject
 import kotlinx.android.synthetic.main.line_home_upcoming.view.*
 
 class UpcomingAdapter(val upcomingList: ArrayList<PUpcomingMovie.Upcoming>, val context: Context): RecyclerView.Adapter<UpcomingAdapter.ViewHolder>() {
+
+    private val onItemClickSubject = PublishSubject.create<Int>()
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bindingValues(get: PUpcomingMovie.Upcoming) {
@@ -27,6 +31,16 @@ class UpcomingAdapter(val upcomingList: ArrayList<PUpcomingMovie.Upcoming>, val 
 
     override fun onBindViewHolder(holder: UpcomingAdapter.ViewHolder, position: Int) {
         holder!!.bindingValues(upcomingList[position])
+
+        //set on item click
+        holder.itemView.setOnClickListener {
+                v -> onItemClickSubject.onNext(holder.adapterPosition)
+        }
+    }
+
+    public fun getOnItemClickObservable(): Observable<Int> {
+        return onItemClickSubject
+        //onItemClickSubject.asObservable()
     }
 
     override fun getItemCount(): Int {

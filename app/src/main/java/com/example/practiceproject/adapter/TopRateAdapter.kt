@@ -8,9 +8,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.practiceproject.R
 import com.example.practiceproject.model.PTopRate
 import com.squareup.picasso.Picasso
+import io.reactivex.Observable
+import io.reactivex.subjects.PublishSubject
 import kotlinx.android.synthetic.main.line_home_top_rate.view.*
 
 class TopRateAdapter(val topRateList: ArrayList<PTopRate.TopRate>, val context: Context): RecyclerView.Adapter<TopRateAdapter.ViewHolder>() {
+
+    private val onItemClickSubject = PublishSubject.create<Int>()
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bindingValues(get: PTopRate.TopRate) {
@@ -27,6 +31,16 @@ class TopRateAdapter(val topRateList: ArrayList<PTopRate.TopRate>, val context: 
 
     override fun onBindViewHolder(holder: TopRateAdapter.ViewHolder, position: Int) {
         holder!!.bindingValues(topRateList[position])
+
+        //set on item click
+        holder.itemView.setOnClickListener {
+                v -> onItemClickSubject.onNext(holder.adapterPosition)
+        }
+    }
+
+    public fun getOnItemClickObservable(): Observable<Int> {
+        return onItemClickSubject
+        //onItemClickSubject.asObservable()
     }
 
     override fun getItemCount(): Int {

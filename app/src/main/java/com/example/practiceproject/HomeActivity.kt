@@ -4,7 +4,7 @@ package com.example.practiceproject
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.MenuItem
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.practiceproject.adapter.NowPlayingAdapter
 import com.example.practiceproject.adapter.PopularAdapter
@@ -12,39 +12,46 @@ import com.example.practiceproject.adapter.TopRateAdapter
 import com.example.practiceproject.adapter.UpcomingAdapter
 import com.example.practiceproject.api.ApiClient
 import com.example.practiceproject.fragment.SearchFragment
-import com.example.practiceproject.model.PNowPlaying
-import com.example.practiceproject.model.PPopular
-import com.example.practiceproject.model.PTopRate
-import com.example.practiceproject.model.PUpcomingMovie
-import com.google.android.material.bottomnavigation.BottomNavigationItemView
+import com.example.practiceproject.model.*
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_home.*
-import java.util.ArrayList
 
 
-/*private const val TOP_RATE_URL = "https://api.themoviedb.org/3/movie/top_rated?api_key=a7e38c80a0efc42034dfb5c8b95a72cb"
-private const val NOW_PLAYING_MOVIE_URL = "https://api.themoviedb.org/3/movie/now_playing?api_key=a7e38c80a0efc42034dfb5c8b95a72cb"
-private const val UPCOMING_MOVIE_URL = "https://api.themoviedb.org/3/movie/upcoming?api_key=a7e38c80a0efc42034dfb5c8b95a72cb"*/
-class HomeActivity : AppCompatActivity() {
+class HomeActivity : AppCompatActivity(){
 
+    //Retrofit
     val apiClient by lazy {
         ApiClient.create()
     }
 
+    //ArrayList
+    private val popList: ArrayList<PPopular.Popular> = ArrayList()
+    private val topRateList: ArrayList<PTopRate.TopRate> = ArrayList()
+    private val nowPlayingList: ArrayList<PNowPlaying.NowPlaying> = ArrayList()
+    private val upcomingList: ArrayList<PUpcomingMovie.Upcoming> = ArrayList()
+
+    //Adapter
+    private val popAdapter: PopularAdapter = PopularAdapter(popList, this@HomeActivity)
+    private val topRateAdapter: TopRateAdapter = TopRateAdapter(topRateList, this@HomeActivity)
+    private val nowPlayingAdapter: NowPlayingAdapter = NowPlayingAdapter(nowPlayingList, this@HomeActivity)
+    private val upcomingAdapter: UpcomingAdapter = UpcomingAdapter(upcomingList, this@HomeActivity)
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
         //Bottom navigation view
         bnvHome.setOnNavigationItemSelectedListener(bottomNavigation)
 
-        //recyclerView
-        rvPopular.layoutManager = LinearLayoutManager(this)
-        rvTopRate.layoutManager = LinearLayoutManager(this)
-        rvNowPlayingMovie.layoutManager = LinearLayoutManager(this)
-        rvUpcomingMovie.layoutManager = LinearLayoutManager(this)
+        //item click
+        popAdapter.getOnItemClickObservable().subscribe()
+        topRateAdapter.getOnItemClickObservable().subscribe()
+        nowPlayingAdapter.getOnItemClickObservable().subscribe()
+        upcomingAdapter.getOnItemClickObservable().subscribe()
 
         //get Popular
         apiClient.getPopular()
@@ -87,19 +94,23 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun setDataInUpcoming(it: ArrayList<PUpcomingMovie.Upcoming>?) {
-        rvUpcomingMovie.adapter = UpcomingAdapter(it!!,this)
+        rvUpcomingMovie.layoutManager = LinearLayoutManager(this)
+        rvUpcomingMovie.adapter = UpcomingAdapter(it!!,this@HomeActivity)
     }
 
     private fun setDataInNowPlaying(it: ArrayList<PNowPlaying.NowPlaying>?) {
-        rvNowPlayingMovie.adapter = NowPlayingAdapter(it!!, this)
+        rvNowPlayingMovie.layoutManager = LinearLayoutManager(this)
+        rvNowPlayingMovie.adapter = NowPlayingAdapter(it!!, this@HomeActivity)
     }
 
     private fun setDataInTopRate(it: ArrayList<PTopRate.TopRate>?) {
-        rvTopRate.adapter = TopRateAdapter(it!!, this)
+        rvTopRate.layoutManager = LinearLayoutManager(this)
+        rvTopRate.adapter = TopRateAdapter(it!!, this@HomeActivity)
     }
 
     private fun setDataInPopular(it: ArrayList<PPopular.Popular>?) {
-        rvPopular.adapter = PopularAdapter(it!!,this)
+        rvPopular.layoutManager = LinearLayoutManager(this)
+        rvPopular.adapter = popAdapter
     }
 
     private val bottomNavigation = BottomNavigationView.OnNavigationItemSelectedListener { item ->
@@ -109,9 +120,9 @@ class HomeActivity : AppCompatActivity() {
                 supportFragmentManager.beginTransaction()
                     .replace(R.id.container, fragment, fragment.javaClass.simpleName)
                     .commit()
-                return@OnNavigationItemSelectedListener true
+                true
             }
+            else -> false
         }
-        false
     }
 }

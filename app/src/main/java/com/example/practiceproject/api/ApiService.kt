@@ -4,6 +4,8 @@ package com.example.practiceproject.api
 import com.example.practiceproject.model.*
 import io.reactivex.Observable
 import retrofit2.Call
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 
 interface ApiService {

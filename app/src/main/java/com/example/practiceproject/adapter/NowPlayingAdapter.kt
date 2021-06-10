@@ -8,9 +8,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.practiceproject.R
 import com.example.practiceproject.model.PNowPlaying
 import com.squareup.picasso.Picasso
+import io.reactivex.Observable
+import io.reactivex.subjects.PublishSubject
 import kotlinx.android.synthetic.main.line_home_now_playing.view.*
 
 class NowPlayingAdapter(val nowPlayingList: ArrayList<PNowPlaying.NowPlaying>, val context: Context): RecyclerView.Adapter<NowPlayingAdapter.ViewHolder>() {
+
+    private val onItemClickSubject = PublishSubject.create<Int>()
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bindingValues(get: PNowPlaying.NowPlaying) {
@@ -27,6 +31,16 @@ class NowPlayingAdapter(val nowPlayingList: ArrayList<PNowPlaying.NowPlaying>, v
 
     override fun onBindViewHolder(holder: NowPlayingAdapter.ViewHolder, position: Int) {
         holder!!.bindingValues(nowPlayingList[position])
+
+        //set on item click
+        holder.itemView.setOnClickListener {
+                v -> onItemClickSubject.onNext(holder.adapterPosition)
+        }
+    }
+
+    public fun getOnItemClickObservable(): Observable<Int> {
+        return onItemClickSubject
+        //onItemClickSubject.asObservable()
     }
 
     override fun getItemCount(): Int {
