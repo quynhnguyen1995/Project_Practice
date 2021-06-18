@@ -36,7 +36,7 @@ class BackdropFragment : Fragment() {
     }
 
     private fun setDataInBackDrop(it: BackDropResult?) {
-        
+
     }
 
     override fun onCreateView(
