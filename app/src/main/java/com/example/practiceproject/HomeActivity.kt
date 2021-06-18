@@ -4,7 +4,6 @@ package com.example.practiceproject
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.practiceproject.adapter.NowPlayingAdapter
 import com.example.practiceproject.adapter.PopularAdapter
@@ -27,10 +26,10 @@ class HomeActivity : AppCompatActivity(){
     }
 
     //ArrayList
-    private val popList: ArrayList<PPopular.Popular> = ArrayList()
-    private val topRateList: ArrayList<PTopRate.TopRate> = ArrayList()
-    private val nowPlayingList: ArrayList<PNowPlaying.NowPlaying> = ArrayList()
-    private val upcomingList: ArrayList<PUpcomingMovie.Upcoming> = ArrayList()
+    private val popList: ArrayList<Popular> = ArrayList()
+    private val topRateList: ArrayList<TopRate> = ArrayList()
+    private val nowPlayingList: ArrayList<NowPlaying> = ArrayList()
+    private val upcomingList: ArrayList<Upcoming> = ArrayList()
 
     //Adapter
     private val popAdapter: PopularAdapter = PopularAdapter(popList, this@HomeActivity)
@@ -46,6 +45,11 @@ class HomeActivity : AppCompatActivity(){
 
         //Bottom navigation view
         bnvHome.setOnNavigationItemSelectedListener(bottomNavigation)
+
+        rvPopular.layoutManager = LinearLayoutManager(this)
+        rvTopRate.layoutManager = LinearLayoutManager(this)
+        rvNowPlayingMovie.layoutManager = LinearLayoutManager(this)
+        rvUpcomingMovie.layoutManager = LinearLayoutManager(this)
 
         //item click
         popAdapter.getOnItemClickObservable().subscribe()
@@ -93,23 +97,19 @@ class HomeActivity : AppCompatActivity(){
             })
     }
 
-    private fun setDataInUpcoming(it: ArrayList<PUpcomingMovie.Upcoming>?) {
-        rvUpcomingMovie.layoutManager = LinearLayoutManager(this)
-        rvUpcomingMovie.adapter = UpcomingAdapter(it!!,this@HomeActivity)
+    private fun setDataInUpcoming(it: Upcoming?) {
+        rvUpcomingMovie.adapter = upcomingAdapter
     }
 
-    private fun setDataInNowPlaying(it: ArrayList<PNowPlaying.NowPlaying>?) {
-        rvNowPlayingMovie.layoutManager = LinearLayoutManager(this)
-        rvNowPlayingMovie.adapter = NowPlayingAdapter(it!!, this@HomeActivity)
+    private fun setDataInNowPlaying(it: NowPlaying?) {
+        rvNowPlayingMovie.adapter = nowPlayingAdapter
     }
 
-    private fun setDataInTopRate(it: ArrayList<PTopRate.TopRate>?) {
-        rvTopRate.layoutManager = LinearLayoutManager(this)
-        rvTopRate.adapter = TopRateAdapter(it!!, this@HomeActivity)
+    private fun setDataInTopRate(it: TopRate?) {
+        rvTopRate.adapter = topRateAdapter
     }
 
-    private fun setDataInPopular(it: ArrayList<PPopular.Popular>?) {
-        rvPopular.layoutManager = LinearLayoutManager(this)
+    private fun setDataInPopular(it: Popular?) {
         rvPopular.adapter = popAdapter
     }
 

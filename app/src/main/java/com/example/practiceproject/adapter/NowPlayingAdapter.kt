@@ -6,18 +6,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.practiceproject.R
-import com.example.practiceproject.model.PNowPlaying
+import com.example.practiceproject.model.NowPlaying
 import com.squareup.picasso.Picasso
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
 import kotlinx.android.synthetic.main.line_home_now_playing.view.*
 
-class NowPlayingAdapter(val nowPlayingList: ArrayList<PNowPlaying.NowPlaying>, val context: Context): RecyclerView.Adapter<NowPlayingAdapter.ViewHolder>() {
+class NowPlayingAdapter(val nowPlayingList: ArrayList<NowPlaying>, val context: Context): RecyclerView.Adapter<NowPlayingAdapter.ViewHolder>() {
 
     private val onItemClickSubject = PublishSubject.create<Int>()
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bindingValues(get: PNowPlaying.NowPlaying) {
+        fun bindingValues(get: NowPlaying) {
             Picasso.get().load("https://image.tmdb.org/t/p/w500/"+get.poster_path)
                 .into(itemView.imgHomeNowPlaying)
             itemView.txtHomeTitleNowPlaying.text = get.title

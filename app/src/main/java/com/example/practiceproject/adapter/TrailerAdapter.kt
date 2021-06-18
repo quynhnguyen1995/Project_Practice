@@ -6,46 +6,43 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.practiceproject.R
-import com.example.practiceproject.model.Popular
+import com.example.practiceproject.model.Poster
+import com.example.practiceproject.model.Trailer
 import com.squareup.picasso.Picasso
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
-import kotlinx.android.synthetic.main.line_home_popular.view.*
+import kotlinx.android.synthetic.main.line_poster.view.*
+import kotlinx.android.synthetic.main.line_trailer.view.*
 
-
-class PopularAdapter(val popList: ArrayList<Popular>, val context: Context) : RecyclerView.Adapter<PopularAdapter.ViewHolder>() {
-
+class TrailerAdapter(val trailerList: ArrayList<Trailer>, val context: Context) : RecyclerView.Adapter<TrailerAdapter.ViewHolder>() {
     private val onItemClickSubject = PublishSubject.create<Int>()
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
-        fun bindingValues(get: Popular) {
-            Picasso.get().load("https://image.tmdb.org/t/p/w500/"+get.poster_path)
-                .into(itemView.imgHomePopular)
-            itemView.txtHomeTitlePopular.text = get.title
+        fun bindingValues(get: Trailer) {
+            itemView.txtSite.text = get.site
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view: View = LayoutInflater.from(context).inflate(R.layout.line_home_popular, parent, false)
+        val view: View = LayoutInflater.from(context).inflate(R.layout.line_trailer, parent, false)
         return ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder!!.bindingValues(popList[position])
+        holder!!.bindingValues(trailerList[position])
 
         //set on item click
         holder.itemView.setOnClickListener {
-            v -> onItemClickSubject.onNext(holder.adapterPosition)
+                v -> onItemClickSubject.onNext(holder.adapterPosition)
         }
     }
 
-    public fun getOnItemClickObservable(): Observable<Int>{
+    public fun getOnItemClickObservable(): Observable<Int> {
         return onItemClickSubject
         //onItemClickSubject.asObservable()
     }
 
     override fun getItemCount(): Int {
-        return popList.size
+        return trailerList.size
     }
-
 }

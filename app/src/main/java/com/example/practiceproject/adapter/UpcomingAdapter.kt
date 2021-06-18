@@ -6,18 +6,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.practiceproject.R
-import com.example.practiceproject.model.PUpcomingMovie
+import com.example.practiceproject.model.Upcoming
 import com.squareup.picasso.Picasso
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
 import kotlinx.android.synthetic.main.line_home_upcoming.view.*
 
-class UpcomingAdapter(val upcomingList: ArrayList<PUpcomingMovie.Upcoming>, val context: Context): RecyclerView.Adapter<UpcomingAdapter.ViewHolder>() {
+class UpcomingAdapter(val upcomingList: ArrayList<Upcoming>, val context: Context): RecyclerView.Adapter<UpcomingAdapter.ViewHolder>() {
 
     private val onItemClickSubject = PublishSubject.create<Int>()
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bindingValues(get: PUpcomingMovie.Upcoming) {
+        fun bindingValues(get: Upcoming) {
             Picasso.get().load("https://image.tmdb.org/t/p/w500/"+get.poster_path)
                 .into(itemView.imgHomeUpcoming)
             itemView.txtHomeTitleUpcoming.text = get.title
